@@ -10,6 +10,7 @@ namespace TestTask.Data.DataServices
     public interface IDataService
     {
         Task Initialize();
+        Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto);
         Task<BankNotifyDTO> GetBankNotifyAsync(long id);
         Task<IList<BankNotifyDTO>> GetBankNotifiesAsync();
         Task<int> GetBankNotifiesCountAsync();

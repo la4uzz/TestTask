@@ -74,5 +74,10 @@ namespace TestTask.Data.DataServices
                 await _db.InsertAsync(new BankNotifyDTO { Id = 5, BankName = "Открытие", DateTimeCreated = DateTime.Parse("2019-01-14"), IsReaded = false, NotifyDescription = "Данные загружены в систему" });
             }
         }
+
+        public Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -24,18 +24,27 @@ namespace TestTask.Data.DataServices
             };
         }
 
-        public MemoryDataService()
+        public MemoryDataService() { }
+
+        public async Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto)
         {
-            
+            await Task.Delay(100);
+            dto.Id = _bankNotifies.Select(x => x.Id).Max() + 1;
+            dto.DateTimeCreated = DateTime.Now;
+            dto.IsReaded = false;
+            _bankNotifies.Add(dto);
+            return dto;
         }
+
         public Task<int> DeleteAllBankNotifiesAsync()
         {
             throw new NotImplementedException();
         }
 
-        public Task<int> DeleteBankNotifyAsync(BankNotifyDTO dto)
+        public async Task<int> DeleteBankNotifyAsync(BankNotifyDTO dto)
         {
-            throw new NotImplementedException();
+            _bankNotifies.Remove(dto);
+            return 0;
         }
 
         public async Task<IList<BankNotifyDTO>> GetBankNotifiesAsync()
@@ -56,9 +65,15 @@ namespace TestTask.Data.DataServices
 
         
 
-        public Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto)
+        public async Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto)
         {
-            throw new NotImplementedException();
+            var notify = _bankNotifies.FirstOrDefault(nt => nt.Id == dto.Id);
+            if(notify!=null)
+            {
+                notify.BankName = dto.BankName;
+                notify.NotifyDescription = dto.NotifyDescription;
+            }
+            return 0;
         }
     }
 }
