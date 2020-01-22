@@ -8,6 +8,7 @@ namespace TestTask.ViewModels.Models
 {
     public class BankNotifyModel
     {
+        public BankNotifyModel() { }
         public BankNotifyModel(long id, string bankName, string notifyDescription, DateTime dateTimeCreated, bool isReaded)
         {
             Id = id;

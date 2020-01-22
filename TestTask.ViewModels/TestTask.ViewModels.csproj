@@ -47,6 +47,13 @@
     <Compile Include="ViewModels\BankNotifyItemViewModel.cs" />
     <Compile Include="ViewModels\BankNotifyViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestTask.Data\TestTask.Data.csproj">
+      <Project>{CAC65347-6A4E-4281-93B4-DC253E9D2C08}</Project>
+      <Name>TestTask.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

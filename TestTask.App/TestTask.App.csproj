@@ -58,6 +58,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\BankNotifyService.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +98,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestTask.Data\TestTask.Data.csproj">
+      <Project>{CAC65347-6A4E-4281-93B4-DC253E9D2C08}</Project>
+      <Name>TestTask.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestTask.ViewModels\TestTask.ViewModels.csproj">
+      <Project>{3C25B5E5-18CE-4011-A630-AF93B503CE7D}</Project>
+      <Name>TestTask.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
