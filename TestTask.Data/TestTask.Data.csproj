@@ -110,11 +110,11 @@
   <ItemGroup>
     <Compile Include="DataServices\IDataService.cs" />
     <Compile Include="DataServices\MemoryDataService.cs" />
+    <Compile Include="DataServices\MSSQLDataService.cs" />
     <Compile Include="DataServices\SQLiteDataService.cs" />
+    <Compile Include="DataServices\WebApiDataService.cs" />
     <Compile Include="Data\BankNotifyDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLite.cs" />
-    <Compile Include="SQLiteAsync.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +10,11 @@ namespace TestTask.Data.DataServices
     /// <summary>
     /// Just example class
     /// </summary>
-    public class SQLiteDataService : IDataService
+    public class WebApiDataService : IDataService
     {
-        public async Task Initialize()
+        public Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto)
         {
-            await CheckCreateDatabase();
-            await FillTableIfEmpty();
+            throw new NotImplementedException();
         }
 
         public Task<int> DeleteAllBankNotifiesAsync()
@@ -44,27 +42,17 @@ namespace TestTask.Data.DataServices
             throw new NotImplementedException();
         }
 
-        public Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task CheckCreateDatabase()
-        {
-            throw new NotImplementedException();
-        }
-
-        private async Task FillTableIfEmpty()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto)
+        public Task Initialize()
         {
             throw new NotImplementedException();
         }
 
         public Task SetBankNotifyReaded(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto)
         {
             throw new NotImplementedException();
         }

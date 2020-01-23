@@ -7,25 +7,15 @@ namespace TestTask.ViewModels.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
-        //private readonly IDataService _dataService;
         private readonly IBankNotifyService _notifyService;
-
-        //public ObservableCollection<BankNotifyItemViewModel> BankNotifies { get; }
 
         public BankNotifyViewModel NotifyViewModel { get; }
 
-        
-
-
-        public MainViewModel(IBankNotifyService notifyService)//, ObservableCollection<BankNotifyItemViewModel> bankNotifies)
+        public MainViewModel(IBankNotifyService notifyService)
         {
-            //_dataService = dataService;
             _notifyService = notifyService;
             NotifyViewModel = new BankNotifyViewModel(notifyService);
-            //BankNotifies = bankNotifies;
-            //_selectedBankNotify = new BankNotifyItemViewModel();
         }
-
 
         public async Task LoadAsync()
         {
