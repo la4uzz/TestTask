@@ -16,11 +16,11 @@ namespace TestTask.Data.DataServices
             await Task.Delay(100);
             _bankNotifies = new List<BankNotifyDTO>
             {
-                new BankNotifyDTO{ Id=1, BankName="ВТБ", DateTimeCreated=DateTime.Parse("2019-01-10"), IsReaded=false, NotifyDescription="Данные загружены в систему" },
-                new BankNotifyDTO{ Id=2, BankName="Сбербанк", DateTimeCreated=DateTime.Parse("2019-01-11"), IsReaded=true, NotifyDescription="Данные загружены в систему" },
-                new BankNotifyDTO{ Id=3, BankName="Газпромбанк", DateTimeCreated=DateTime.Parse("2019-01-12"), IsReaded=false, NotifyDescription="Данные загружены в систему" },
-                new BankNotifyDTO{ Id=4, BankName="Точка", DateTimeCreated=DateTime.Parse("2019-01-13"), IsReaded=true, NotifyDescription="Данные загружены в систему" },
-                new BankNotifyDTO{ Id=5, BankName="Открытие", DateTimeCreated=DateTime.Parse("2019-01-14"), IsReaded=false, NotifyDescription="Данные загружены в систему" }
+                new BankNotifyDTO{ Id=1, BankName="ВТБ", DateTimeCreated=DateTime.Parse("2019-01-10 09:11:01"), IsReaded=false, NotifyDescription="Данные загружены в систему" },
+                new BankNotifyDTO{ Id=2, BankName="Сбербанк", DateTimeCreated=DateTime.Parse("2019-01-11 12:01:15"), IsReaded=true, NotifyDescription="Данные загружены в систему" },
+                new BankNotifyDTO{ Id=3, BankName="Газпромбанк", DateTimeCreated=DateTime.Parse("2019-01-12 18:19:23"), IsReaded=false, NotifyDescription="Данные загружены в систему" },
+                new BankNotifyDTO{ Id=4, BankName="Точка", DateTimeCreated=DateTime.Parse("2019-01-13 23:00:01"), IsReaded=true, NotifyDescription="Данные загружены в систему" },
+                new BankNotifyDTO{ Id=5, BankName="Открытие", DateTimeCreated=DateTime.Parse("2019-01-14 10:51:30"), IsReaded=false, NotifyDescription="Данные загружены в систему" }
             };
         }
 
@@ -29,20 +29,27 @@ namespace TestTask.Data.DataServices
         public async Task<BankNotifyDTO> CreateBankNotifyAsync(BankNotifyDTO dto)
         {
             await Task.Delay(100);
-            dto.Id = _bankNotifies.Select(x => x.Id).Max() + 1;
+            long id = 1;
+            if (_bankNotifies.Count > 0)
+                id = _bankNotifies.Select(x => x.Id).Max() + 1;
+
+            dto.Id = id;
             dto.DateTimeCreated = DateTime.Now;
             dto.IsReaded = false;
             _bankNotifies.Add(dto);
             return dto;
         }
 
-        public Task<int> DeleteAllBankNotifiesAsync()
+        public async Task<int> DeleteAllBankNotifiesAsync()
         {
-            throw new NotImplementedException();
+            await Task.Delay(100);
+            _bankNotifies.Clear();
+            return 0;
         }
 
         public async Task<int> DeleteBankNotifyAsync(BankNotifyDTO dto)
         {
+            await Task.Delay(100);
             _bankNotifies.Remove(dto);
             return 0;
         }
@@ -53,20 +60,21 @@ namespace TestTask.Data.DataServices
             return _bankNotifies;
         }
 
-        public Task<int> GetBankNotifiesCountAsync()
+        public async Task<int> GetBankNotifiesCountAsync()
         {
-            throw new NotImplementedException();
+            await Task.Delay(100);
+            return _bankNotifies.Count;
         }
 
-        public Task<BankNotifyDTO> GetBankNotifyAsync(long id)
+        public async Task<BankNotifyDTO> GetBankNotifyAsync(long id)
         {
-            throw new NotImplementedException();
+            await Task.Delay(100);
+            return _bankNotifies.FirstOrDefault(nt => nt.Id == id);
         }
-
-        
 
         public async Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto)
         {
+            await Task.Delay(100);
             var notify = _bankNotifies.FirstOrDefault(nt => nt.Id == dto.Id);
             if(notify!=null)
             {
@@ -74,6 +82,14 @@ namespace TestTask.Data.DataServices
                 notify.NotifyDescription = dto.NotifyDescription;
             }
             return 0;
+        }
+
+        public async Task SetBankNotifyReaded(long id)
+        {
+            await Task.Delay(100);
+            var notify = _bankNotifies.FirstOrDefault(nt => nt.Id == id);
+            if (notify != null)
+                _bankNotifies.FirstOrDefault(nt => nt.Id == id).IsReaded = true;
         }
     }
 }

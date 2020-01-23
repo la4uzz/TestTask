@@ -7,10 +7,19 @@
              xmlns:vms="clr-namespace:TestTask.ViewModels.ViewModels;assembly=TestTask.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" d:DataContext="{d:DesignInstance vms:BankNotifyItemViewModel}" >
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -18,17 +27,12 @@
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">Уведомления</TextBlock>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="Наименование банка:" />
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Описание уведомления:" />
-
-
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding DisplayName}" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}" />
-        
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Наименование банка" />
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding DisplayName}" />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Описание уведомления" />
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Description}" />
     </Grid>
 </UserControl>

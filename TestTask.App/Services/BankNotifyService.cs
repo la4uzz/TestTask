@@ -17,14 +17,14 @@ namespace TestTask.App.Services
         {
             _dataService = dataService;
         }
-        public Task<int> DeleteAllBankNotifiesAsync()
+        public async Task<int> DeleteAllBankNotifiesAsync()
         {
-            throw new NotImplementedException();
+            return await _dataService.DeleteAllBankNotifiesAsync();
         }
 
-        public Task<int> DeleteBankNotifyAsync(BankNotifyModel model)
+        public async Task<int> DeleteBankNotifyAsync(BankNotifyModel model)
         {
-            throw new NotImplementedException();
+            return await _dataService.DeleteBankNotifyAsync(GenerateBankNotifyDTOFromModel(model));
         }
 
         public async Task<IList<BankNotifyModel>> GetBankNotifiesAsync()
@@ -33,39 +33,63 @@ namespace TestTask.App.Services
             var items = await _dataService.GetBankNotifiesAsync();
             foreach(var item in items)
             {
-                models.Add(await CreateBankNotifyModel(item));
+                models.Add(GenerateBankNotifyModelFromDTO(item));
             }
             return models;
         }
 
-        public Task<int> GetBankNotifiesCountAsync()
+        public async Task<int> GetBankNotifiesCountAsync()
         {
-            throw new NotImplementedException();
+            return await _dataService.GetBankNotifiesCountAsync();
         }
 
-        public Task<BankNotifyModel> GetBankNotifyAsync(long id)
+        public async Task<BankNotifyModel> GetBankNotifyAsync(long id)
         {
-            throw new NotImplementedException();
+            var dto = await _dataService.GetBankNotifyAsync(id);
+            return GenerateBankNotifyModelFromDTO(dto);
         }
 
-        public Task<int> UpdateBankNotifyAsync(BankNotifyModel model)
+        public async Task<int> UpdateBankNotifyAsync(BankNotifyModel model)
         {
-            throw new NotImplementedException();
+            return await _dataService.UpdateBankNotifyAsync(GenerateBankNotifyDTOFromModel(model));
         }
 
-        static public async Task<BankNotifyModel> CreateBankNotifyModel(BankNotifyDTO dto)
+        public async Task Initialize()
         {
-            await Task.Delay(100);
-            var model = new BankNotifyModel()
-            {
-                Id = dto.Id,
-                BankName = dto.BankName,
-                NotifyDescription = dto.NotifyDescription,
-                DateTimeCreated = dto.DateTimeCreated,
-                IsReaded = dto.IsReaded
-            };
+            await _dataService.Initialize();
+        }
 
+        public async Task<BankNotifyModel> CreateBankNotifyAsync(BankNotifyModel model)
+        {
+            var newDTO = await _dataService.CreateBankNotifyAsync(GenerateBankNotifyDTOFromModel(model));
+            return GenerateBankNotifyModelFromDTO(newDTO);
+        }
+
+        public async Task SetBankNotifyReaded(long id)
+        {
+            await _dataService.SetBankNotifyReaded(id);
+        }
+
+        #region static methods
+        private static BankNotifyModel GenerateBankNotifyModelFromDTO(BankNotifyDTO dto)
+        {
+            var model = new BankNotifyModel(dto.Id, dto.BankName, dto.NotifyDescription, dto.DateTimeCreated, dto.IsReaded);
             return model;
         }
+
+        private static BankNotifyDTO GenerateBankNotifyDTOFromModel(BankNotifyModel model)
+        {
+            var bankNotifyDTO = new BankNotifyDTO
+            {
+                Id = model.Id,
+                IsReaded = model.IsReaded,
+                BankName = model.BankName,
+                DateTimeCreated = model.DateTimeCreated,
+                NotifyDescription = model.NotifyDescription
+            };
+
+            return bankNotifyDTO;
+        }
+        #endregion
     }
 }

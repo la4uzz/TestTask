@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestTask.Data.Data;
+using TestTask.Data.DataServices;
 
 namespace TestTask.ViewModels.Models
 {
     public class BankNotifyModel
     {
-        public BankNotifyModel() { }
+        public BankNotifyModel() {}
         public BankNotifyModel(long id, string bankName, string notifyDescription, DateTime dateTimeCreated, bool isReaded)
         {
             Id = id;
@@ -23,6 +25,5 @@ namespace TestTask.ViewModels.Models
         public string NotifyDescription { get; set; }
         public DateTime DateTimeCreated { get; set; }
         public bool IsReaded { get; set; }
-
     }
 }

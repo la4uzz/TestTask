@@ -32,7 +32,7 @@ namespace TestTask.App
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            await _model.Load();
+            await _model.LoadAsync();
 
             if (WindowState == WindowState.Minimized)
             {

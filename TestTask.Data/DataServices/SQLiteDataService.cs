@@ -79,5 +79,10 @@ namespace TestTask.Data.DataServices
         {
             throw new NotImplementedException();
         }
+
+        public Task SetBankNotifyReaded(long id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

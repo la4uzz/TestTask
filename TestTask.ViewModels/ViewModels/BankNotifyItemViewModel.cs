@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using TestTask.Data.DataServices;
 using TestTask.ViewModels.Infrastructure;
 using TestTask.ViewModels.Models;
 using TestTask.ViewModels.Services;
@@ -13,11 +14,28 @@ namespace TestTask.ViewModels.ViewModels
 {
     public class BankNotifyItemViewModel :BaseViewModel
     {
-        public ICommand SetBankNotifyReaded => new RelayCommand<bool>((r)=> { IsReaded = r; });
+        private readonly IBankNotifyService _notifyService;
+        public ICommand SetBankNotifyReaded => new RelayCommand<bool>(SetBankNotifyReadedAsync);
+        private async void SetBankNotifyReadedAsync(bool read)
+        {
+            this.IsReaded = !read;
+            await _notifyService.SetBankNotifyReaded(this.Id);
+        }
 
         public long Id { get; }
         public DateTime Created { get; }
         
+        public string CreatedTime
+        {
+            get
+            {
+                if (DateTime.Now == DateTime.Today)
+                    return Created.ToString("HH:mm");
+                else
+                    return Created.ToString("ddd, HH:mm");
+            }
+        }
+
         private bool _isReaded;
         public bool IsReaded {
             get { return _isReaded; }
@@ -48,9 +66,13 @@ namespace TestTask.ViewModels.ViewModels
                 OnPropertyChanged();
             }
         }
-        public BankNotifyItemViewModel() { }
-        public BankNotifyItemViewModel(long id, DateTime created, bool isReaded, string displayName, string description)
+        public BankNotifyItemViewModel() 
         {
+            
+        }
+        public BankNotifyItemViewModel(IBankNotifyService notifyService, long id, DateTime created, bool isReaded, string displayName, string description)
+        {
+            _notifyService = notifyService;
             Id = id;
             Created = created;
             IsReaded = isReaded;

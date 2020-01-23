@@ -24,7 +24,7 @@ namespace TestTask.App
         {
             _container.Bind<IDataService>().To<MemoryDataService>().InSingletonScope();
             _container.Bind<IBankNotifyService>().To<BankNotifyService>().InSingletonScope();
-            _container.Bind<ObservableCollection<BankNotifyItemViewModel>>().ToSelf().InSingletonScope();
+            //_container.Bind<ObservableCollection<BankNotifyItemViewModel>>().ToSelf().InSingletonScope();
 
             Start();
 

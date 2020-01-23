@@ -17,5 +17,6 @@ namespace TestTask.Data.DataServices
         Task<int> UpdateBankNotifyAsync(BankNotifyDTO dto);
         Task<int> DeleteBankNotifyAsync(BankNotifyDTO dto);
         Task<int> DeleteAllBankNotifiesAsync();
+        Task SetBankNotifyReaded(long id);
     }
 }
